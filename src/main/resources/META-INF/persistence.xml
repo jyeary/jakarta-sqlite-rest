@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd" 
+             version="3.0">
+    <persistence-unit name="sqlitePU" transaction-type="RESOURCE_LOCAL" >
+        
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <!-- The memory database does not handle locks well, but will work for demos. -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlite:memory"/>
+            <!-- Glassfish and Payara deployments -->
+            <!-- A default blank DB is included in project -->
+            <!--<property name="jakarta.persistence.jdbc.url" value="jdbc:sqlite:${com.sun.aas.instanceRoot}/applications/jakarta-sqlite-rest/WEB-INF/classes/sqlite.db"/>-->
+            <!-- Local Database -->
+            <!--<property name="jakarta.persistence.jdbc.url" value="jdbc:sqlite:${user.home}/jakarta-sqlite-rest.db"/>-->
+            <property name="jakarta.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
+            <property name="jakarta.persistence.jdbc.user" value=""/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <!-- Hibernate -->
+            <property name="hibernate.dialect" value="org.sqlite.hibernate.dialect.SQLiteDialect" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="format_sql" value="true" />
+            <property name="hibernate.connection.charSet" value="UTF-8" />
+            <!-- You may need to use "create", but this will erase data -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+        </properties>
+        
+    </persistence-unit>
+</persistence>
